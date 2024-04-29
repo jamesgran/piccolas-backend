@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import express, { Application } from "express";
 import productoRoutes from './routes/producto.route';
 import usuarioRoutes from './routes/usuario.route';
+import pedidoRoutes from './routes/pedido.route';
 dotenv.config();
 
 export class Server {
@@ -12,7 +13,8 @@ export class Server {
 
     private apiPaths = {
         producto: '/api/v1/producto',
-        usuario: '/api/v1/usuario'
+        usuario: '/api/v1/usuario',
+        pedido: '/api/v1/pedido',
     }
 
     constructor(){
@@ -30,6 +32,7 @@ export class Server {
     routes(): void {
         this.app.use(this.apiPaths.producto, productoRoutes)
         this.app.use(this.apiPaths.usuario, usuarioRoutes)
+        this.app.use(this.apiPaths.pedido, pedidoRoutes)
 
     }
     listen(){

@@ -1,4 +1,5 @@
-import { Request, Response } from "express"
+import { Request, Response } from "express";
+import bcrypt from "bcryptjs";
 
 const model = require ('../models/usuario.model')
 const comunes = require('../middlewares/comunes')
@@ -16,6 +17,13 @@ export const getUsuarios = async (req: Request, res: Response) => {
 
 export const crearUsuario = async (req: Request, res: Response) =>{
   const usuario = req.body
+  const {password} = req.body;
+
+  //encriptacion de contraseña
+  const salt = bcrypt.genSaltSync(5);
+  usuario.password = bcrypt.hashSync(password, salt)
+  console.log('contraseña encriptada ', usuario)
+
   model.crear(usuario).then(() =>{
     return res.send(comunes.respuestaCreacion())
   })
