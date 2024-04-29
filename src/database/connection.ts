@@ -14,4 +14,4 @@ const pool = new Pool({
 //Para que la zona horario corresponda a la de la base de datos
 types.setTypeParser(1184, (str: any) => str);
 types.setTypeParser(1114, (str: any) => str);
-module.exports = pool;
+export default pool;

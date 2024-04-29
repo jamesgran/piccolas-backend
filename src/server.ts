@@ -3,6 +3,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import express, { Application } from "express";
 import productoRoutes from './routes/producto.route';
+import usuarioRoutes from './routes/usuario.route';
 dotenv.config();
 
 export class Server {
@@ -10,7 +11,8 @@ export class Server {
     private port: String;
 
     private apiPaths = {
-        producto: '/api/v1/producto'
+        producto: '/api/v1/producto',
+        usuario: '/api/v1/usuario'
     }
 
     constructor(){
@@ -27,6 +29,7 @@ export class Server {
     }
     routes(): void {
         this.app.use(this.apiPaths.producto, productoRoutes)
+        this.app.use(this.apiPaths.usuario, usuarioRoutes)
 
     }
     listen(){
