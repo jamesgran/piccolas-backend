@@ -1,10 +1,22 @@
 import connection from "../database/connection";
 
 module.exports = {
+
   async consultar() {
     const resultado = await connection.query(`select * from usuario`);
     return resultado.rows;
   },
+
+  async consultarUsuario(email: any){
+    const resultado = await connection.query(`select * from usuario where email = $1`, email);
+    return resultado.rows;
+  },
+
+  async consultarPorID(id:any){
+    const resultado = await connection.query(`select * from usuario where id_usuario = $1`, id);
+    return resultado.rows;
+  },
+
   async crear(usuario: any) {
     const resultado = await connection.query(
       `INSERT INTO usuario(
@@ -14,11 +26,13 @@ module.exports = {
     );
     return resultado.rowCount;
   },
+
   async eliminar (id_usuario: any) {
     const resultado = await connection.query(
     `delete from usuario where id_usuario = $1`, [id_usuario]
     )
   },
+
   async actualizar (usuario: any){
     const resultado = await connection.query(
         `update usuario 

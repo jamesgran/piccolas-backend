@@ -7,13 +7,27 @@ const comunes = require('../middlewares/comunes')
 
 export const getUsuarios = async (req: Request, res: Response) => {
   
-    model.consultar().then((resultados: any) => {
+   model.consultar().then((resultados: any) => {
       return res.send(comunes.respuestaConsulta(resultados))
       })
       .catch((err: any) => {
         return res.status(comunes.COD_500).send(comunes.respuestaExcepcion(err))
       })
     }
+
+
+
+
+    
+export const getUnUsuario = async (req: Request, res: Response) => {
+  const {email} = req.body
+  model.consultarUsuario(email).then((resultados: any) => {
+    return res.send(resultados)
+  })
+  .catch((err:any) => {
+    return res.status(comunes.COD_500).send(comunes.respuestaExcepcion(err))
+  })
+}
 
 export const crearUsuario = async (req: Request, res: Response) =>{
   const usuario = req.body

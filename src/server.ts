@@ -6,6 +6,7 @@ import productoRoutes from './routes/producto.route';
 import usuarioRoutes from './routes/usuario.route';
 import pedidoRoutes from './routes/pedido.route';
 import detalle_pedidoRoutes from './routes/detalle_pedido.route';
+import authRoutes from './routes/auth.route';
 dotenv.config();
 
 export class Server {
@@ -17,6 +18,7 @@ export class Server {
         usuario: '/api/v1/usuario',
         pedido: '/api/v1/pedido',
         detalle_pedido: '/api/v1/detalle_pedido',
+        auth: '/api/v1/auth',
     }
 
     constructor(){
@@ -36,6 +38,7 @@ export class Server {
         this.app.use(this.apiPaths.usuario, usuarioRoutes)
         this.app.use(this.apiPaths.pedido, pedidoRoutes)
         this.app.use(this.apiPaths.detalle_pedido, detalle_pedidoRoutes)
+        this.app.use(this.apiPaths.auth, authRoutes)
 
     }
     listen(){
