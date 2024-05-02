@@ -25,5 +25,19 @@ module.exports = {
         set cantidad = $1 where id_detalle_pedido=$2`,
         [detalle_pedido.cantidad, detalle_pedido.id_detalle_pedido]
     )
+  },
+  //consulta detalle_pedido por id_pedido mostrando informaicon relevante
+  async consultarPorIdPedido (id_pedido: number){
+    const resultado = await connection.query(
+      `select p.nombre, p.descripcion, p.precio_venta,
+      d.cantidad, (p.precio_venta*d.cantidad) as total,
+      pe.estado, pe.id_usuario, pe.id_pedido
+      from detalle_pedido d
+      inner join producto p on d.id_producto=p.id_producto
+      inner join pedido pe on  d.id_pedido=pe.id_pedido
+      where d.id_pedido = $1`,
+      [id_pedido]
+  ) 
+  return resultado.rows;
   }
 };

@@ -15,9 +15,17 @@ export const getPedidos = async (req: Request, res: Response) => {
     }
 
 export const crearPedido = async (req: Request, res: Response) =>{
+  /*
+  estructura del pedido
+  {
+    id_usuario: $1,
+    cantidad: $2,
+    id_producto: $3
+  }
+  */
   const pedido = req.body
-  model.crear(pedido).then(() =>{
-    return res.send(comunes.respuestaCreacion())
+  model.crear(pedido).then((resultados: any) =>{
+    return res.send(comunes.respuestaGenerica(resultados))
   })
   .catch((err: any) =>{
     return res.status(comunes.COD_500).send(comunes.respuestaExcepcion(err))

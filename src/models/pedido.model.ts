@@ -7,12 +7,11 @@ module.exports = {
   },
   async crear(pedido: any) {
     const resultado = await connection.query(
-      `INSERT INTO pedido(
-            id_usuario)
-                VALUES ($1)`,
-      [pedido.id_usuario]
+      `select public.crear_pedido($1,$2,$3)`,
+      [pedido.id_usuario, pedido.cantidad, pedido.id_producto]
     );
-    return resultado.rowCount;
+    console.log(resultado.rows)
+    return resultado.rows;
   },
   async eliminar (id_pedido: any) {
     const resultado = await connection.query(

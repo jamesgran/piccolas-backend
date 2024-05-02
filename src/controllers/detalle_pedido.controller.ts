@@ -7,6 +7,7 @@ const comunes = require('../middlewares/comunes')
 export const getDetallePedidos = async (req: Request, res: Response) => {
   
     model.consultar().then((resultados: any) => {
+      console.log(resultados)
       return res.send(comunes.respuestaConsulta(resultados))
       })
       .catch((err: any) => {
@@ -44,4 +45,16 @@ export const actualizarDetallePedido = async (req: Request, res: Response) => {
   .catch((err:any) => {
     return res.status(comunes.COD_500).send(comunes.respuestaExcepcion(err))
   })
-};
+}
+
+export const getPedidoPorIdPedido = async (req: Request, res: Response) => {
+  const id_pedido = req.params.id_pedido
+  
+  model.consultarPorIdPedido(id_pedido).then((resultados: any) => {
+    
+    return res.send(comunes.respuestaConsulta(resultados))
+    })
+    .catch((err: any) => {
+      return res.status(comunes.COD_500).send(comunes.respuestaExcepcion(err))
+    })
+  }

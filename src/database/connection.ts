@@ -1,7 +1,7 @@
 const {Pool} = require('pg');
 const types = require('pg').types;
 require('dotenv').config();
-console.log("Valor de USER:", process.env.USER)
+
 const pool = new Pool({
     user: process.env.DB_USER,
     host: process.env.HOST,
