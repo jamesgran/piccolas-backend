@@ -56,6 +56,6 @@ module.exports = {
 		return this.estado(this.COD_EXITOSO, this.MSG_EXITOSO, this.DTL_ELIMINAR_EXITOSO)
 	},
 	respuestaGenerica(respuesta :any) {
-		return this.estado(this.COD_EXITOSO, this.MSG_EXITOSO, this.DTL_EXITOSO, respuesta)
+		return this.estado(this.COD_EXITOSO, this.MSG_EXITOSO, respuesta)
 	},
 }

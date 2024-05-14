@@ -1,12 +1,16 @@
 import { Router } from 'express';
-import { actualizarProducto, crearProducto, eliminarProducto, getProductos } from '../controllers/producto.controller';
+import { actualizarProducto, crearProducto, eliminarProducto, getDestacados, getImagenById, getImagenes, getProductos, getProductoyId } from '../controllers/producto.controller';
 import { check } from 'express-validator';
 import { validarCampos } from '../middlewares/validarCampos';
 import validateJWT from '../middlewares/validateJWT';
 const router = Router();
 
-router.get('/',validateJWT, getProductos)
-router.post('/',validateJWT,
+router.get('/', getProductos)
+router.get('/destacados', getDestacados)
+router.get('/imagenes', getImagenes)
+router.get('/imagen/:id_producto', getImagenById)
+router.get('/:id_producto', getProductoyId)
+router.post('/',
 [
     check("nombre", "El nombre es obligatorio").not().isEmpty(),
     check("descripcion", "La descripcion es obligatoria").not().isEmpty(),

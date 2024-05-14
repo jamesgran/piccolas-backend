@@ -1,46 +1,101 @@
-import { Request, Response } from "express"
+import { Request, Response } from "express";
 
-const model = require ('../models/producto.model')
-const comunes = require('../middlewares/comunes')
-
+const model = require("../models/producto.model");
+const comunes = require("../middlewares/comunes");
 
 export const getProductos = async (req: Request, res: Response) => {
-  
-    model.consultar().then((resultados: any) => {
-      return res.send(comunes.respuestaConsulta(resultados))
-      })
-      .catch((err: any) => {
-        return res.status(comunes.COD_500).send(comunes.respuestaExcepcion(err))
-      })
-    }
+  model
+    .consultar()
+    .then((resultados: any) => {
+      return res.send(comunes.respuestaConsulta(resultados));
+    })
+    .catch((err: any) => {
+      return res.status(comunes.COD_500).send(comunes.respuestaExcepcion(err));
+    });
+};
 
-export const crearProducto = async (req: Request, res: Response) =>{
-  const producto = req.body
-  model.crear(producto).then(() =>{
-    return res.send(comunes.respuestaCreacion())
-  })
-  .catch((err: any) =>{
-    return res.status(comunes.COD_500).send(comunes.respuestaExcepcion(err))
-  })
-}
+export const getDestacados = async (req: Request, res: Response) => {
+  model
+    .consultarDestacados()
+    .then((resultados: any) => {
+      return res.send(comunes.respuestaConsulta(resultados));
+    })
+    .catch((err: any) => {
+      return res.status(comunes.COD_500).send(comunes.respuestaExcepcion(err));
+    });
+};
 
-export const eliminarProducto = async (req: Request, res: Response) =>{
-  const id_producto = req.params.id_producto
+export const crearProducto = async (req: Request, res: Response) => {
+  const producto = req.body;
+  model
+    .crear(producto)
+    .then(() => {
+      return res.send(comunes.respuestaCreacion());
+    })
+    .catch((err: any) => {
+      return res.status(comunes.COD_500).send(comunes.respuestaExcepcion(err));
+    });
+};
 
-  model.eliminar(id_producto).then(()=>{
-    return res.send(comunes.respuestaEliminar())
-  })
-  .catch( (err:any) =>{
-    return res.status(comunes.COD_500).send(comunes.respuestaExcepcion(err))
-  })
-}
+export const eliminarProducto = async (req: Request, res: Response) => {
+  const id_producto = req.params.id_producto;
+
+  model
+    .eliminar(id_producto)
+    .then(() => {
+      return res.send(comunes.respuestaEliminar());
+    })
+    .catch((err: any) => {
+      return res.status(comunes.COD_500).send(comunes.respuestaExcepcion(err));
+    });
+};
 export const actualizarProducto = async (req: Request, res: Response) => {
   const producto = req.body;
-  model.actualizar(producto).then(()=>{
-    return res.send(comunes.respuestaModificacion())
-
-  })
-  .catch((err:any) => {
-    return res.status(comunes.COD_500).send(comunes.respuestaExcepcion(err))
-  })
+  model
+    .actualizar(producto)
+    .then(() => {
+      return res.send(comunes.respuestaModificacion());
+    })
+    .catch((err: any) => {
+      return res.status(comunes.COD_500).send(comunes.respuestaExcepcion(err));
+    });
 };
+
+export const getImagenes = async (req: Request, res: Response) => {
+  model
+    .consultarImagenes()
+    .then((resultados: any) => {
+      return res.send(comunes.respuestaConsulta(resultados));
+    })
+    .catch((err: any) => {
+      return res.status(comunes.COD_500).send(comunes.respuestaExcepcion(err));
+    });
+};
+
+export const getImagenById = async (req: Request, res: Response) => {
+  const id_producto = req.params.id_producto;
+
+  model
+    .getImagenbyId(id_producto)
+    .then((resultados: any) => {
+      return res.send(comunes.respuestaConsulta(resultados));
+    })
+    .catch((err: any) => {
+      return res.status(comunes.COD_500).send(comunes.respuestaExcepcion(err));
+    });
+};
+
+export const getProductoyId = async (req: Request, res: Response) => {
+  const id_producto = req.params.id_producto;
+
+  model
+    .getProductoyId(id_producto)
+    .then((resultados: any) => {
+      return res.send(comunes.respuestaConsulta(resultados));
+    })
+    .catch((err: any) => {
+      return res.status(comunes.COD_500).send(comunes.respuestaExcepcion(err));
+    });
+};
+
+
