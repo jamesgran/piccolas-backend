@@ -17,13 +17,16 @@ export const getPedidos = async (req: Request, res: Response) => {
 export const crearPedido = async (req: Request, res: Response) =>{
   /*
   estructura del pedido
-  {
-    id_usuario: $1,
-    cantidad: $2,
-    id_producto: $3
-  }
+{
+	"id_usuario": 10,
+	"productos": [
+		{"id_producto": 1296, "cantidad": 1},
+		{"id_producto": 1297, "cantidad": 2}
+	]
+}
   */
   const pedido = req.body
+
   model.crear(pedido).then((resultados: any) =>{
     return res.send(comunes.respuestaGenerica(resultados))
   })
@@ -52,4 +55,16 @@ export const actualizarPedido = async (req: Request, res: Response) => {
   .catch((err:any) => {
     return res.status(comunes.COD_500).send(comunes.respuestaExcepcion(err))
   })
+
+  
 };
+export const consultarporIdUsuario = async (req: Request, res: Response) =>{
+  const id_usuario = req.params.id_usuario
+
+  model.consultarPorIdUsuario(id_usuario).then((resultados: any)=>{
+    return res.send(comunes.respuestaGenerica(resultados))
+  })
+  .catch( (err:any) =>{
+    return res.status(comunes.COD_500).send(comunes.respuestaExcepcion(err))
+  })
+}
