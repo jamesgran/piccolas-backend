@@ -7,6 +7,8 @@ import usuarioRoutes from './routes/usuario.route';
 import pedidoRoutes from './routes/pedido.route';
 import detalle_pedidoRoutes from './routes/detalle_pedido.route';
 import authRoutes from './routes/auth.route';
+import emailRoutes from './routes/mail.route';
+
 dotenv.config();
 
 export class Server {
@@ -19,6 +21,7 @@ export class Server {
         pedido: '/api/v1/pedido',
         detalle_pedido: '/api/v1/detalle_pedido',
         auth: '/api/v1/auth',
+        email: '/api/v1/email'
     }
 
     constructor(){
@@ -39,6 +42,7 @@ export class Server {
         this.app.use(this.apiPaths.pedido, pedidoRoutes)
         this.app.use(this.apiPaths.detalle_pedido, detalle_pedidoRoutes)
         this.app.use(this.apiPaths.auth, authRoutes)
+        this.app.use(this.apiPaths.email, emailRoutes) 
 
     }
     listen(){
@@ -46,4 +50,5 @@ export class Server {
             console.log("La aplicacion esta en linea por el puerto:", this.port)
         })
     }
+         
 }
